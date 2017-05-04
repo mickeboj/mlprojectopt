@@ -20,4 +20,4 @@ def set_genome_par(genome,bounds):
 def set_ga_par(ga):
     ga.setGenerations(200)
     ga.setMutationRate(0.2)
-    ga.setPopulationSize(600)
+    ga.setPopulationSize(500)
