@@ -10,6 +10,8 @@ def obj_fun(x):
         n = float(len(x))
         return -20.0*math.exp(-0.2*math.sqrt(first_sum/n)) - math.exp(second_sum/n) + 20.0 + math.e
 
+
+
 def get_bounds():
     return -32,32
 
