@@ -12,6 +12,9 @@ def obj_fun(x):
 
 
 
+def get_opt_min():
+    return 0.0
+
 def get_bounds():
     return -32,32
 

@@ -12,13 +12,13 @@ ackley.set_ga_par(Gsolv.ga)
 Bsolv = BFGS.BFGS()
 Bsolv.set_dim(dim)
 Bsolv.set_obj_fun(ackley.obj_fun)
-Bsolv.set_opt(True)
+Bsolv.set_opt(True,100)
 
 
 
 if __name__ == '__main__':
 
-    best = Gsolv.solve()
-    print "Best individual found for GA was" ,best
+    #best = Gsolv.solve()
+    #print "Best individual found for GA was: %1.4f\n\n" %best
     best2 = Bsolv.solve(ackley.get_bounds())
     print "Best solution found was", best2

@@ -19,6 +19,7 @@ class BFGS(object):
     def set_opt(self,disp,maxiter=None):
         d = {}
         d['disp'] = disp
+        d['gtol'] = 1e-6
         if maxiter:
             d['maxiter']=maxiter
         self.options = d
@@ -27,7 +28,5 @@ class BFGS(object):
         x0=[]
         for i in range(self.dim):
             x0.append(bounds[1] - r(1)[0]*(bounds[1]-bounds[0]))
-        res = minimize(self.obj_fun,x0,method='BFGS',options=self.options)
-        if self.options['disp']:
-            print res.message
+        res = minimize(self.obj_fun,x0,method='BFGS',options=self.options,tol=1e-22)
         return res.fun
