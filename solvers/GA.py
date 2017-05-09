@@ -22,3 +22,6 @@ class Genetic_Solver(object):
     def solve(self):
         self.ga.evolve(freq_stats=self.freq)
         return self.ga.bestIndividual().getRawScore()
+
+    def reset(self):
+        self.ga.initialize()
