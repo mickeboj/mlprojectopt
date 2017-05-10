@@ -2,11 +2,12 @@ import numpy as np
 
 class STest(object):
 
-    def __init__(self,GAsolver,NSolver):
+    def __init__(self,GAsolver,NSolver,bounds,num_runs):
         self.GAsolver = GAsolver
         self.NSolver = NSolver
         self.result = {}
-        self.num_runs = 100
+        self.num_runs = num_runs
+        self.bounds = bounds
     def run(self):
         print "Starting GA test"
         result = []
@@ -17,7 +18,7 @@ class STest(object):
         print "Starting N test"
         result = []
         for i in range(self.num_runs):
-            result.append(self.NSolver.solve())
+            result.append(self.NSolver.solve(self.bounds))
             print "Test number %d (%d) done" %(i+1,self.num_runs)
         self.result['NRes'] = np.array(result)
 
