@@ -38,6 +38,6 @@ Bsolv.set_grad(ackley.get_grad)
 
 
 if __name__ == '__main__':
-    Stabtest = stabilitytest.STest(get_Gsolv,Bsolv)
+    Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,ackley.get_bounds(),100)
     Stabtest.run()
     Stabtest.print_res()
