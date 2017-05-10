@@ -28,6 +28,9 @@ class BFGS(object):
             d['maxiter']=maxiter
         self.options = d
 
+    def name(self):
+        return "BFGS"
+
     def solve(self,bounds):
         x0=[]
         for i in range(self.dim):

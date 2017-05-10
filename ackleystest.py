@@ -3,7 +3,7 @@ from functions import ackley
 from tests import stabilitytest
 from pyevolve import Initializators, Mutators, Crossovers
 
-dim = 20
+dim = 100
 
 
 
