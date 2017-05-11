@@ -1,10 +1,9 @@
 from solvers import GA,BFGS
 from functions import ackley
-from tests import stabilitytest
+from tests import stabilitytest, accuracytest
 from pyevolve import Initializators, Mutators, Crossovers
 
-dim = 100
-
+dimension = 30
 
 
 def set_genome_par(genome,bounds):
@@ -19,7 +18,7 @@ def set_ga_par(ga):
     ga.setPopulationSize(200)
 
 
-def get_Gsolv():
+def get_Gsolv(dim):
     Gsolv = GA.Genetic_Solver()
     Gsolv.set_fun(ackley.obj_fun,dim,0)
     set_genome_par(Gsolv.genome,ackley.get_bounds())
@@ -27,9 +26,8 @@ def get_Gsolv():
     set_ga_par(Gsolv.ga)
     return Gsolv
 
-Gsolv = get_Gsolv()
 Bsolv = BFGS.BFGS()
-Bsolv.set_dim(dim)
+Bsolv.set_dim(dimension)
 Bsolv.set_obj_fun(ackley.obj_fun)
 Bsolv.set_opt(False,300)
 Bsolv.set_grad(ackley.get_grad)
@@ -38,6 +36,12 @@ Bsolv.set_grad(ackley.get_grad)
 
 
 if __name__ == '__main__':
-    Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,ackley.get_bounds(),100)
-    Stabtest.run()
-    Stabtest.print_res()
+    #Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,ackley.get_bounds(),
+    #dimension,100,ackley.name())
+    #Stabtest.run()
+    #Stabtest.print_res()
+
+    Acctest = accuracytest.ATest(get_Gsolv,Bsolv,ackley.get_bounds(),
+                                dimension,10,ackley.get_opt_min(),ackley.name())
+    Acctest.run()
+    Acctest.print_res()
