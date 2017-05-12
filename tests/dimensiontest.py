@@ -39,7 +39,7 @@ class DTest(object):
         self.result['NResT'] = np.array(result_time)
 
     def print_res(self):
-        print "\n\n\t\t--------Result from testing %s over %d different dimensions with both time and error   --------\n" %(self.fun_name,self.num_runs)
+        print "\n\n\t\t--------Result from testing %s over %d different dimensions with both time and error   --------\n" %(self.fun_name,len(self.dim))
         print "\tGA Error Result: %1.3f (avg) %1.3f (std)"%(np.mean(self.result['GAResE']),np.std(self.result['GAResE']))
         print "\t%s Error Result: %1.3f (avg) %1.3f (std)"%(self.NSolver.name(),np.mean(self.result['NResE']),np.std(self.result['NResE']))
         print "\tGA Time Result: %1.3f (avg) %1.3f (std)"%(np.mean(self.result['GAResT']),np.std(self.result['GAResT']))
