@@ -13,13 +13,14 @@ class ATest(object):
         self.fun_name = name
 
     def run(self):
-        print "Starting GA test"
+        print "\n\t\t-------- Accuracy Test --------\n"
+        print "\nStarting GA test"
         result = []
         for i in range(self.num_runs):
             result.append(np.abs(self.GAsolver(self.dim).solve()-self.opt_val))
             print "Test number %d (%d) done" %(i+1,self.num_runs)
         self.result['GARes'] = np.array(result)
-        print "Starting %s test" %self.NSolver.name()
+        print "\nStarting %s test" %self.NSolver.name()
         result = []
         for i in range(self.num_runs):
             result.append(np.abs(self.NSolver.solve(self.bounds)-self.opt_val))
@@ -27,6 +28,6 @@ class ATest(object):
         self.result['NRes'] = np.array(result)
 
     def print_res(self):
-        print "Result from testing %s %d runs comparing the best solution found with the optimal one.\n The difference is then sumed up over the 10 runs" %(self.fun_name,self.num_runs)
+        print "\n\n\t\t--------Result from testing %s %d runs comparing the best solution found with the optimal one --------\n The difference is then sumed up over the 10 runs" %(self.fun_name,self.num_runs)
         print "\tGA Result: %1.3f (avg) %1.3f (std)"%(np.mean(self.result['GARes']),np.std(self.result['GARes']))
         print "\t%s Result: %1.3f (avg) %1.3f (std)"%(self.NSolver.name(),np.mean(self.result['NRes']),np.std(self.result['NRes']))

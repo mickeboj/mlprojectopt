@@ -11,13 +11,14 @@ class STest(object):
         self.dim = dim
         self.fun_name = name
     def run(self):
-        print "Starting GA test"
+        print "\n\t\t-------- Accuracy Test --------\n"
+        print "\nStarting GA test"
         result = []
         for i in range(self.num_runs):
             result.append(self.GAsolver(self.dim).solve())
             print "Test number %d (%d) done" %(i+1,self.num_runs)
         self.result['GARes'] = np.array(result)
-        print "Starting %s test" %self.NSolver.name()
+        print "\nStarting %s test" %self.NSolver.name()
         result = []
         for i in range(self.num_runs):
             result.append(self.NSolver.solve(self.bounds))
@@ -25,6 +26,6 @@ class STest(object):
         self.result['NRes'] = np.array(result)
 
     def print_res(self):
-        print "Result from testing %s over %d runs in terms of mean and std of the best solutions found" %(self.fun_name,self.num_runs)
+        print "\n\n\t\t-------- Result from testing %s over %d runs in terms of mean and std of the best solutions found--------" %(self.fun_name,self.num_runs)
         print "\tGA Result: %1.3f (avg) %1.3f (std)"%(np.mean(self.result['GARes']),np.std(self.result['GARes']))
         print "\t%s Result: %1.3f (avg) %1.3f (std)"%(self.NSolver.name(),np.mean(self.result['NRes']),np.std(self.result['NRes']))
