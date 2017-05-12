@@ -20,3 +20,4 @@ if __name__ == '__main__':
     print "Best individual found for GA was" ,best
     best2 = Bsolv.solve(step.get_bounds())
     print "Best solution found using BFGS was", best2
+    
