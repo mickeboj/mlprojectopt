@@ -26,6 +26,6 @@ class STest(object):
         self.result['NRes'] = np.array(result)
 
     def print_res(self):
-        print "\n\n\t\t-------- Result from testing %s over %d runs in terms of mean and std of the best solutions found--------" %(self.fun_name,self.num_runs)
+        print "\n\n\t\t-------- Result from testing %s over %d runs in terms of mean and std of the best solutions found--------\n" %(self.fun_name,self.num_runs)
         print "\tGA Result: %1.3f (avg) %1.3f (std)"%(np.mean(self.result['GARes']),np.std(self.result['GARes']))
         print "\t%s Result: %1.3f (avg) %1.3f (std)"%(self.NSolver.name(),np.mean(self.result['NRes']),np.std(self.result['NRes']))

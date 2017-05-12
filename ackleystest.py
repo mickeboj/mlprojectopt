@@ -1,6 +1,6 @@
 from solvers import GA,BFGS
 from functions import ackley
-from tests import stabilitytest, accuracytest
+from tests import stabilitytest, accuracytest, timetest, dimensiontest
 from pyevolve import Initializators, Mutators, Crossovers
 
 dimension = 30
@@ -41,7 +41,15 @@ if __name__ == '__main__':
     #Stabtest.run()
     #Stabtest.print_res()
 
-    Acctest = accuracytest.ATest(get_Gsolv,Bsolv,ackley.get_bounds(),
-                                dimension,10,ackley.get_opt_min(),ackley.name())
-    Acctest.run()
-    Acctest.print_res()
+    # Acctest = accuracytest.ATest(get_Gsolv,Bsolv,ackley.get_bounds(),
+    #                             dimension,10,ackley.get_opt_min(),ackley.name())
+    # Acctest.run()
+    # Acctest.print_res()
+    # Timetest = timetest.TTest(get_Gsolv,Bsolv,ackley.get_bounds(),
+    #                             dimension,10,ackley.name())
+    # Timetest.run()
+    # Timetest.print_res()
+
+    Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,ackley.get_bounds(),ackley.get_opt_min(),ackley.name())
+    Dimtest.run()
+    Dimtest.print_res()

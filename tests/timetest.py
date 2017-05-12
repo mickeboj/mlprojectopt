@@ -12,7 +12,7 @@ class TTest(object):
         self.dim = dim
         self.fun_name = name
     def run(self):
-        print "\n\t\t-------- time Test --------\n"
+        print "\n\t\t-------- Time Test --------\n"
         print "\nStarting GA test"
         result = []
         for i in range(self.num_runs):
@@ -33,6 +33,6 @@ class TTest(object):
         self.result['NRes'] = np.array(result)
 
     def print_res(self):
-        print "\n\n\t\t-------- Result from testing %s over %d runs in terms of time taken--------" %(self.fun_name,self.num_runs)
-        print "\tGA Time result: %1.3f (avg) %1.3f (std)"%(np.mean(self.result['GARes']),np.std(self.result['GARes']))
-        print "\t%s Time result: %1.3f (avg) %1.3f (std)"%(self.NSolver.name(),np.mean(self.result['NRes']),np.std(self.result['NRes']))
+        print "\n\n\t\t-------- Result from testing %s over %d runs in terms of time taken--------\n\n" %(self.fun_name,self.num_runs)
+        print "\tGA Time result: %1.3fs (avg) %1.3fs (std)"%(np.mean(self.result['GARes']),np.std(self.result['GARes']))
+        print "\t%s Time result: %1.3fs (avg) %1.3fs (std)"%(self.NSolver.name(),np.mean(self.result['NRes']),np.std(self.result['NRes']))

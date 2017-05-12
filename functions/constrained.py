@@ -13,12 +13,11 @@ def obj_fun(x):
 def get_grad(x):
     grad = []
     n = float(len(x))
+    prod = 1.0
     for c in x:
-        prod = 1.0
-        for i in x:
-            if(i != c):
-                prod = prod*i
-        grad.append((math.sqrt(n)**n)*prod+2*c)
+        prod*=c
+    for c in x:
+        grad.append((math.sqrt(n)**n)*prod/c+2*c)
     return np.array(grad)
 
 def get_opt_min():
