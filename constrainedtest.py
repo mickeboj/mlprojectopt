@@ -1,7 +1,7 @@
 from solvers import GA,BFGS
 from functions import constrained
 from tests import stabilitytest, accuracytest
-from pyevolve import Initializators, Mutators, Crossovers
+from pyevolve import Initializators, Mutators, Crossovers, Scaling
 
 dimension = 30
 
@@ -16,6 +16,7 @@ def set_ga_par(ga):
     ga.setGenerations(200)
     ga.setMutationRate(0.12)
     ga.setPopulationSize(200)
+    ga.getPopulation().scaleMethod.set(Scaling.SigmaTruncScaling)
 
 
 def get_Gsolv(dim):
