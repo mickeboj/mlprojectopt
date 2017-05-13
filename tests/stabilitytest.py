@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 class STest(object):
 
@@ -26,6 +28,17 @@ class STest(object):
         self.result['NRes'] = np.array(result)
 
     def print_res(self):
-        print "\n\n\t\t-------- Result from testing %s over %d runs in terms of mean and std of the best solutions found--------" %(self.fun_name,self.num_runs)
+        print "\n\n\t\t-------- Result from testing %s over %d runs in terms of mean and std of the best solutions found--------\n" %(self.fun_name,self.num_runs)
         print "\tGA Result: %1.3f (avg) %1.3f (std)"%(np.mean(self.result['GARes']),np.std(self.result['GARes']))
         print "\t%s Result: %1.3f (avg) %1.3f (std)"%(self.NSolver.name(),np.mean(self.result['NRes']),np.std(self.result['NRes']))
+
+    def plot_res(self):
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        GA_line = ax.plot(np.array(range(self.num_runs)),self.result['GARes'],label="Genetic Algorithm")
+        N_line = ax.plot(np.array(range(self.num_runs)),self.result['NRes'],label=self.NSolver.name())
+        ax.legend()
+        ax.set_xlabel('Run #')
+        ax.set_ylabel('Best solution')
+        ax.set_title("Difference in best solution for %s (%d dimensions)" %(self.fun_name,self.dim))
+        plt.show()

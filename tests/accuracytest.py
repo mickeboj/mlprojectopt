@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 class ATest(object):
 
@@ -28,6 +29,18 @@ class ATest(object):
         self.result['NRes'] = np.array(result)
 
     def print_res(self):
-        print "\n\n\t\t--------Result from testing %s %d runs comparing the best solution found with the optimal one --------\n The difference is then sumed up over the 10 runs" %(self.fun_name,self.num_runs)
+        print "\n\n\t\t--------Result from testing %s %d runs comparing the best solution found with the optimal one --------\n"%(self.fun_name,self.num_runs)
+        print "The result is stored as an absolute error relative to the optimal one (%1.1f)\n" %self.opt_val
         print "\tGA Result: %1.3f (avg) %1.3f (std)"%(np.mean(self.result['GARes']),np.std(self.result['GARes']))
         print "\t%s Result: %1.3f (avg) %1.3f (std)"%(self.NSolver.name(),np.mean(self.result['NRes']),np.std(self.result['NRes']))
+
+    def plot_res(self):
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        GA_line = ax.plot(np.array(range(self.num_runs)),self.result['GARes'],label="Genetic Algorithm")
+        N_line = ax.plot(np.array(range(self.num_runs)),self.result['NRes'],label=self.NSolver.name())
+        ax.legend()
+        ax.set_xlabel('Run #')
+        ax.set_ylabel('Error')
+        ax.set_title("Absolte error for %s (%d dimensions)" %(self.fun_name,self.dim))
+        plt.show()
