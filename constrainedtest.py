@@ -1,4 +1,4 @@
-from solvers import GA,BFGS
+from solvers import GA,BFGS,LBFGSB
 from functions import constrained
 from tests import stabilitytest, accuracytest
 from pyevolve import Initializators, Mutators, Crossovers, Scaling
@@ -27,11 +27,12 @@ def get_Gsolv(dim):
     set_ga_par(Gsolv.ga)
     return Gsolv
 
-Bsolv = BFGS.BFGS()
+Bsolv = LBFGSB.LBFGSB()
 Bsolv.set_dim(dimension)
-Bsolv.set_obj_fun(constrained.obj_fun)
+Bsolv.set_obj_fun(constrained.obj_fun_unmerged)
+Bsolv.set_constraints(constrained.get_fun_constraints)
 Bsolv.set_opt(False,300)
-Bsolv.set_grad(constrained.get_grad)
+Bsolv.set_grad(constrained.get_grad_unmerged)
 
 
 
@@ -46,3 +47,4 @@ if __name__ == '__main__':
                                 dimension,10,constrained.get_opt_min(),constrained.name())
     Acctest.run()
     Acctest.print_res()
+    Acctest.plot_res()

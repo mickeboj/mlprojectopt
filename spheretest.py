@@ -36,12 +36,13 @@ Bsolv.set_grad(sphere.get_grad)
 
 
 if __name__ == '__main__':
-    Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,sphere.get_bounds(),
-    dimension,100,sphere.name())
-    Stabtest.run()
-    Stabtest.print_res()
+    #Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,sphere.get_bounds(),
+    #dimension,100,sphere.name())
+    #Stabtest.run()
+    #Stabtest.print_res()
 
-    #Acctest = accuracytest.ATest(get_Gsolv,Bsolv,sphere.get_bounds(),
-    #                            dimension,10,sphere.get_opt_min(),sphere.name())
-    #Acctest.run()
-    #Acctest.print_res()
+    Acctest = accuracytest.ATest(get_Gsolv,Bsolv,sphere.get_bounds(),
+                                dimension,10,sphere.get_opt_min(),sphere.name())
+    Acctest.run()
+    Acctest.print_res()
+    Acctest.plot_res()
