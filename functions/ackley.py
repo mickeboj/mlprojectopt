@@ -30,4 +30,4 @@ def get_bounds():
     return -32,32
 
 def name():
-    return "Ackley's function"
+    return "Ackley's Function"
