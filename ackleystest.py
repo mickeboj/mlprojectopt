@@ -3,7 +3,7 @@ from functions import ackley
 from tests import stabilitytest, accuracytest, timetest, dimensiontest
 from pyevolve import Initializators, Mutators, Crossovers
 
-dimension = 20
+dimension = 25
 
 
 def set_genome_par(genome,bounds):
@@ -36,23 +36,23 @@ Bsolv.set_grad(ackley.get_grad)
 
 
 if __name__ == '__main__':
-    # Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,ackley.get_bounds(),
-    # dimension,10,ackley.name())
-    # Stabtest.run()
-    # Stabtest.print_res()
-    # Stabtest.plot_res()
+    Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,ackley.get_bounds(),
+    dimension,100,ackley.name())
+    Stabtest.run()
+    Stabtest.print_res()
+    Stabtest.plot_res()
 
-    # Acctest = accuracytest.ATest(get_Gsolv,Bsolv,ackley.get_bounds(),
-    #                             dimension,10,ackley.get_opt_min(),ackley.name())
-    # Acctest.run()
-    # Acctest.print_res()
-    # Acctest.plot_res()
+    Acctest = accuracytest.ATest(get_Gsolv,Bsolv,ackley.get_bounds(),
+                                dimension,50,ackley.get_opt_min(),ackley.name())
+    Acctest.run()
+    Acctest.print_res()
+    Acctest.plot_res()
 
-    # Timetest = timetest.TTest(get_Gsolv,Bsolv,ackley.get_bounds(),
-    #                             dimension,10,ackley.name())
-    # Timetest.run()
-    # Timetest.print_res()
-    # Timetest.plot_res()
+    Timetest = timetest.TTest(get_Gsolv,Bsolv,ackley.get_bounds(),
+                                dimension,100,ackley.name())
+    Timetest.run()
+    Timetest.print_res()
+    Timetest.plot_res()
 
     Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,ackley.get_bounds(),range(10,201,10),ackley.get_opt_min(),ackley.name())
     Dimtest.run()
