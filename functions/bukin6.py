@@ -11,13 +11,8 @@ def obj_fun(x):
 def get_bounds():
     return -15,3
 
-def set_genome_par(genome,bounds):
-    genome.setParams(rangemin=bounds[0],rangemax=bounds[1])
-    genome.initializator.set(Initializators.G1DListInitializatorReal)
-    genome.mutator.set(Mutators.G1DListMutatorRealGaussian)
-    genome.crossover.set(Crossovers.G1DListCrossoverRealSBX)
+def get_opt_min():
+    return 0.0
 
-def set_ga_par(ga):
-    ga.setGenerations(200)
-    ga.setMutationRate(0.2)
-    ga.setPopulationSize(500)
+def name():
+    return "Bukin n.6 function"

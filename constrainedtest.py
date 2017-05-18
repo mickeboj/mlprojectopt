@@ -1,9 +1,9 @@
 from solvers import GA,BFGS,LBFGSB
 from functions import constrained
-from tests import stabilitytest, accuracytest
+from tests import stabilitytest, accuracytest, dimensiontest
 from pyevolve import Initializators, Mutators, Crossovers, Scaling
 
-dimension = 30
+dimension = 3
 
 
 def set_genome_par(genome,bounds):
@@ -30,21 +30,27 @@ def get_Gsolv(dim):
 Bsolv = LBFGSB.LBFGSB()
 Bsolv.set_dim(dimension)
 Bsolv.set_obj_fun(constrained.obj_fun_unmerged)
-Bsolv.set_constraints(constrained.get_fun_constraints)
+Bsolv.set_constraints(constrained.get_fun_constraints())
 Bsolv.set_opt(False,300)
 Bsolv.set_grad(constrained.get_grad_unmerged)
+Bsolv.set_bnds(constrained.get_bounds_tuple)
 
 
 
 
 if __name__ == '__main__':
-    #Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,constrained.get_bounds(),
-    #dimension,100,constrained.name())
-    #Stabtest.run()
-    #Stabtest.print_res()
+    # Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,constrained.get_bounds(),
+    # dimension,10,constrained.name())
+    # Stabtest.run()
+    # Stabtest.print_res()
+    #
+    # Acctest = accuracytest.ATest(get_Gsolv,Bsolv,constrained.get_bounds(),
+    #                             dimension,10,constrained.get_opt_min(),constrained.name())
+    # Acctest.run()
+    # Acctest.print_res()
+    # Acctest.plot_res()
 
-    Acctest = accuracytest.ATest(get_Gsolv,Bsolv,constrained.get_bounds(),
-                                dimension,10,constrained.get_opt_min(),constrained.name())
-    Acctest.run()
-    Acctest.print_res()
-    Acctest.plot_res()
+    Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,constrained.get_bounds(),range(2,13),constrained.get_opt_min(),constrained.name())
+    Dimtest.run()
+    Dimtest.print_res()
+    Dimtest.plot_res()

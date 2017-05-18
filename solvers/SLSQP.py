@@ -2,7 +2,7 @@ from scipy.optimize import minimize
 from numpy.random import random as r
 
 
-class LBFGSB(object):
+class SLSQP(object):
 
 
     def __init__(self):
@@ -11,6 +11,7 @@ class LBFGSB(object):
         self.options = None
         self.grad = None
         self.constraints = None
+        self.bnds_fun= None
 
     def set_obj_fun(self,fun):
         self.obj_fun=fun
@@ -24,21 +25,25 @@ class LBFGSB(object):
     def set_grad(self,grad):
         self.grad = grad
 
+    def set_bnds(self,bnds_fun):
+        self.bnds_fun = bnds_fun
+
     def set_opt(self,disp,maxiter=None):
         d = {}
         d['disp'] = disp
-        d['gtol'] = 1e-6
+        #d['gtol'] = 1e-6
         if maxiter:
             d['maxiter']=maxiter
         self.options = d
 
     def name(self):
-        return "L-BFGS-B"
+        return "SLSQP"
 
 
     def solve(self,bounds):
         x0=[]
+        bnds = self.bnds_fun(self.dim)
         for i in range(self.dim):
             x0.append(bounds[1] - r(1)[0]*(bounds[1]-bounds[0]))
-        res = minimize(self.obj_fun,x0,method='L-BFGS-B',jac=self.grad,constraints=self.constraints,options=self.options,tol=1e-22)
+        res = minimize(self.obj_fun,x0,method='SLSQP',jac=self.grad,constraints=self.constraints,options=self.options,tol=1e-22, bounds=bnds)
         return res.fun
