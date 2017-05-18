@@ -1,2 +1,10 @@
 # Ignoring compelations of python
 *.pyc
+
+
+# Ignoring pictures
+*.png
+
+
+# Ignoring notes
+/result.txt
