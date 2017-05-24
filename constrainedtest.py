@@ -27,7 +27,7 @@ def get_Gsolv(dim):
     set_ga_par(Gsolv.ga)
     return Gsolv
 
-Bsolv = LBFGSB.LBFGSB()
+Bsolv = SLSQP.SLSQP()
 Bsolv.set_dim(dimension)
 Bsolv.set_obj_fun(constrained.obj_fun_unmerged)
 Bsolv.set_constraints(constrained.get_fun_constraints())
