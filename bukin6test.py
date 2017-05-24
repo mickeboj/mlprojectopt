@@ -29,7 +29,7 @@ Bsolv = BFGS.BFGS()
 Bsolv.set_dim(dimension)
 Bsolv.set_obj_fun(bukin6.obj_fun)
 Bsolv.set_opt(False,300)
-#Bsolv.set_grad(bukin6.get_grad)
+Bsolv.set_grad(bukin6.get_grad)
 
 
 if __name__ == '__main__':
