@@ -30,7 +30,7 @@ Bsolv = BFGS.BFGS()
 Bsolv.set_dim(dimension)
 Bsolv.set_obj_fun(rosenbrock.obj_fun)
 Bsolv.set_opt(False,300)
-#Bsolv.set_grad(rosenbrock.get_grad)
+Bsolv.set_grad(rosenbrock.get_grad)
 
 
 
@@ -40,21 +40,21 @@ if __name__ == '__main__':
     dimension,100,rosenbrock.name())
     Stabtest.run()
     Stabtest.print_res()
-    Stabtest.plot_res() 
+    Stabtest.plot_res()
 
-    #Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),range(10,201,10),rosenbrock.get_opt_min(),rosenbrock.name())
-    #Dimtest.run()
-    #Dimtest.print_res()
-    #Dimtest.plot_res()
+    Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),range(10,201,10),rosenbrock.get_opt_min(),rosenbrock.name())
+    Dimtest.run()
+    Dimtest.print_res()
+    Dimtest.plot_res()
 
-    #Timetest = timetest.TTest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
-    #                            dimension,100,rosenbrock.name())
-    #Timetest.run()
-    #Timetest.print_res()
-    #Timetest.plot_res()
+    Timetest = timetest.TTest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
+                               dimension,100,rosenbrock.name())
+    Timetest.run()
+    Timetest.print_res()
+    Timetest.plot_res()
 
-    #Acctest = accuracytest.ATest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
-    #                            dimension,50,rosenbrock.get_opt_min(),rosenbrock.name())
-    #Acctest.run()
-    #Acctest.print_res()
-    #Acctest.plot_res()
+    Acctest = accuracytest.ATest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
+                               dimension,50,rosenbrock.get_opt_min(),rosenbrock.name())
+    Acctest.run()
+    Acctest.print_res()
+    Acctest.plot_res()

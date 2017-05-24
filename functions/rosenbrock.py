@@ -10,11 +10,11 @@ def obj_fun(x):
 
     return first_sum + second_sum
 
-#def get_grad(x):
-#    grad = []
-#    for c in x:
-#        grad.append(2*c)
-#    return None
+def get_grad(x):
+    grad = []
+    for i in range(len(x)):
+        grad.append(-400*x[i]*(x[i+1]-x[i]**2)+2*(x[i]-1))
+    return np.array(grad)
 
 def get_opt_min():
     return 0.0
