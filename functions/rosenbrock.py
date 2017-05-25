@@ -13,7 +13,7 @@ def obj_fun(x):
 def get_grad(x):
     grad = []
     for i in range(len(x)-1):
-        if i == 1:
+        if i == 0:
             grad.append(-400.0*x[i]*(x[i+1]-x[i]**2.0)-2.0*(1-x[i]))
         else:
             grad.append(200.0*(x[i]-x[i-1]**2.0)-400.0*x[i]*(x[i+1]-x[i]**2.0)-2.0*(1-x[i]))
@@ -25,7 +25,7 @@ def get_opt_min():
     return 0.0
 
 def get_bounds():
-    return -5,10
+    return -30,30
 
 def name():
     return "Rosenbrock function"
