@@ -45,5 +45,5 @@ class SIMPLEX(object):
         bnds = self.bnds_fun(self.dim)
         for i in range(self.dim):
             x0.append(bounds[1] - r(1)[0]*(bounds[1]-bounds[0]))
-        res = minimize(self.obj_fun,x0,method='nelder-mead',jac=self.grad,constraints=self.constraints,options=self.options,tol=1e-22, bounds=bnds)
+        res = linprog(self.obj_fun,x0,method='nelder-',jac=self.grad,constraints=self.constraints,options=self.options,tol=1e-22, bounds=bnds)
         return res.fun
