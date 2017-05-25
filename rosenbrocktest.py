@@ -3,7 +3,7 @@ from functions import rosenbrock
 from tests import stabilitytest, accuracytest,dimensiontest,timetest
 from pyevolve import Initializators, Mutators, Crossovers
 
-dimension = 10
+dimension = 25
 
 
 def set_genome_par(genome,bounds):
@@ -36,25 +36,25 @@ Bsolv.set_grad(rosenbrock.get_grad)
 
 
 if __name__ == '__main__':
-    # Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
-    # dimension,10,rosenbrock.name())
-    # Stabtest.run()
-    # Stabtest.print_res()
-    # # Stabtest.plot_res()
-    #
-    # Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),range(10,201,10),rosenbrock.get_opt_min(),rosenbrock.name())
-    # Dimtest.run()
-    # Dimtest.print_res()
-    # Dimtest.plot_res()
-    #
-    # Timetest = timetest.TTest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
-    #                            dimension,100,rosenbrock.name())
-    # Timetest.run()
-    # Timetest.print_res()
-    # Timetest.plot_res()
+    Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
+    dimension,100,rosenbrock.name())
+    Stabtest.run()
+    Stabtest.print_res()
+    Stabtest.plot_res()
+
+    Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),range(10,201,10),rosenbrock.get_opt_min(),rosenbrock.name())
+    Dimtest.run()
+    Dimtest.print_res()
+    Dimtest.plot_res()
+
+    Timetest = timetest.TTest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
+                               dimension,100,rosenbrock.name())
+    Timetest.run()
+    Timetest.print_res()
+    Timetest.plot_res()
 
     Acctest = accuracytest.ATest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
-                               dimension,10,rosenbrock.get_opt_min(),rosenbrock.name())
+                               dimension,50,rosenbrock.get_opt_min(),rosenbrock.name())
     Acctest.run()
     Acctest.print_res()
     Acctest.plot_res()
