@@ -11,7 +11,18 @@ class SIMPLEX(object):
         self.options = None
         self.grad = None
         self.constraints = None
-        # self.bnds_fun= None
+        self.A = None
+        self.B = None
+        self.C = None
+        self.Hi = None
+        self.Lo = None
+
+    def set_matrices(self,A_mat,B_mat,C_mat,Hi_mat,Lo_mat):
+        self.A = A_mat
+        self.B = B_mat
+        self.C = C_mat
+        self.Hi = Hi_mat
+        self.Lo = Lo_mat
 
     def set_obj_fun(self,fun):
         self.obj_fun=fun
@@ -41,9 +52,9 @@ class SIMPLEX(object):
 
 
     def solve(self,bounds):
-        x0=[]
+        # x0=[]
         # bnds = self.bnds_fun(self.dim)
-        for i in range(self.dim):
-            x0.append(bounds[1] - r(1)[0]*(bounds[1]-bounds[0]))
-        res = minimize(self.obj_fun,x0,method='nelder-mead',jac=self.grad,constraints=self.constraints,options=self.options,tol=1e-22, bounds=bounds)
+        # for i in range(self.dim):
+        #     x0.append(bounds[1] - r(1)[0]*(bounds[1]-bounds[0]))
+        res = linprog(self.C,A_eq= self.A,b_eq = self.B,bounds = (self.Lo,self.Hi))
         return res.fun
