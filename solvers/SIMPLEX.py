@@ -11,7 +11,7 @@ class SIMPLEX(object):
         self.options = None
         self.grad = None
         self.constraints = None
-        self.bnds_fun= None
+        # self.bnds_fun= None
 
     def set_obj_fun(self,fun):
         self.obj_fun=fun
@@ -25,8 +25,8 @@ class SIMPLEX(object):
     def set_grad(self,grad):
         self.grad = grad
 
-    def set_bnds(self,bnds_fun):
-        self.bnds_fun = bnds_fun
+    # def set_bnds(self,bnds_fun):
+    #     self.bnds_fun = bnds_fun
 
     def set_opt(self,disp,maxiter=None):
         d = {}
@@ -37,13 +37,13 @@ class SIMPLEX(object):
         self.options = d
 
     def name(self):
-        return "Simplex"
+        return "nelder-mead"
 
 
     def solve(self,bounds):
         x0=[]
-        bnds = self.bnds_fun(self.dim)
+        # bnds = self.bnds_fun(self.dim)
         for i in range(self.dim):
             x0.append(bounds[1] - r(1)[0]*(bounds[1]-bounds[0]))
-        res = linprog(self.obj_fun,x0,method='nelder-',jac=self.grad,constraints=self.constraints,options=self.options,tol=1e-22, bounds=bnds)
+        res = minimize(self.obj_fun,x0,method='nelder-mead',jac=self.grad,constraints=self.constraints,options=self.options,tol=1e-22, bounds=bounds)
         return res.fun

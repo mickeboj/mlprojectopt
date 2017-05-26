@@ -1,4 +1,4 @@
-from solvers import GA,BFGS
+from solvers import GA,BFGS,SIMPLEX
 from functions import rosenbrock
 from tests import stabilitytest, accuracytest,dimensiontest,timetest
 from pyevolve import Initializators, Mutators, Crossovers
@@ -29,9 +29,8 @@ def get_Gsolv(dim):
 Bsolv = BFGS.BFGS()
 Bsolv.set_dim(dimension)
 Bsolv.set_obj_fun(rosenbrock.obj_fun)
-Bsolv.set_opt(True,300)
+Bsolv.set_opt(False,300)
 Bsolv.set_grad(rosenbrock.get_grad)
-
 
 
 
@@ -53,8 +52,8 @@ if __name__ == '__main__':
     Timetest.print_res()
     Timetest.plot_res()
 
-    Acctest = accuracytest.ATest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
-                               dimension,50,rosenbrock.get_opt_min(),rosenbrock.name())
-    Acctest.run()
-    Acctest.print_res()
-    Acctest.plot_res()
+    # Acctest = accuracytest.ATest(get_Gsolv,Bsolv,rosenbrock.get_bounds(),
+    #                            dimension,50,rosenbrock.get_opt_min(),rosenbrock.name())
+    # Acctest.run()
+    # Acctest.print_res()
+    # Acctest.plot_res()
