@@ -39,7 +39,9 @@ def check_constraints_bnds(x):
     return False
 
 def obj_fun(x):
-    return np.dot(c,np.array(x))
+    z = np.array(x.genomeList)
+    z = z.reshape(1,51)
+    return np.dot(z,c)[0][0]
 
 
 def name():

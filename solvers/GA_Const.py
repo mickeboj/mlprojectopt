@@ -1,4 +1,5 @@
-from pyevolve import G1DList, GSimpleGA, Selectors
+from pyevolve import G1DList, Selectors
+from pyevolve.GSimpleGA import GSimpleGA
 from pyevolve import Initializators, Mutators, Consts, Util
 import math
 import random
@@ -16,10 +17,10 @@ import pyevolve
 import numpy as np
 
 
-class GConstGA(GSimpleGA.GSimpleGA):
+class GConstGA(GSimpleGA):
 
     def __init__(self,genome,check_fun):
-        super(GConstGA,self).__init__(genome)
+        GSimpleGA.__init__(self,genome)
         self.check_fun  = check_fun
 
 
@@ -55,8 +56,10 @@ class GConstGA(GSimpleGA.GSimpleGA):
                 sister.mutate(pmut=self.pMutation, ga_engine=self)
                 brother.mutate(pmut=self.pMutation, ga_engine=self)
                 if self.check_fun(np.array(sister.genomeList)) and self.check_fun(np.array(brother.genomeList)):
+                    print "yes"
                     break
 
+            print "adding"
             newPop.internalPop.append(sister)
             newPop.internalPop.append(brother)
 
@@ -74,6 +77,7 @@ class GConstGA(GSimpleGA.GSimpleGA):
                     sister.mutate(pmut=self.pMutation, ga_engine=self)
 
                 if self.check_fun(np.array(sister.genomeList)):
+                    print "Yes"
                     break
             newPop.internalPop.append(sister)
 
