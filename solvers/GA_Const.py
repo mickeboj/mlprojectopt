@@ -1,5 +1,3 @@
-
-
 from pyevolve import G1DList, GSimpleGA, Selectors
 from pyevolve import Initializators, Mutators, Consts, Util
 import math
@@ -15,6 +13,7 @@ from pyevolve.FunctionSlot import FunctionSlot
 from pyevolve.GenomeBase import GenomeBase
 from pyevolve.DBAdapters import DBBaseAdapter
 import pyevolve
+import numpy as np
 
 
 class GConstGA(GSimpleGA.GSimpleGA):
