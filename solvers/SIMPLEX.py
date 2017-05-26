@@ -48,7 +48,7 @@ class SIMPLEX(object):
         self.options = d
 
     def name(self):
-        return "nelder-mead"
+        return "Simplex"
 
 
     def solve(self,bounds):
