@@ -13,7 +13,6 @@ hi_bnds = tempH['hi']
 tempL = scipy.io.loadmat('Lo.mat')
 lo_bnds = tempL['lo']
 
-
 def get_A():
     return A
 
@@ -38,6 +37,10 @@ def check_constraints_bnds(x):
             if(x >= lo_bnds).all():
                 return True
     return False
+
+def obj_fun(x):
+    return np.dot(c,np.array(x))
+
 
 def name():
     return "affiro LP problem"

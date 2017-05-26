@@ -125,8 +125,8 @@ class Genetic_Solver(object):
         self.genome.evaluator.set(fun)
         self.freq = freq
 
-    def set_instance(self):
-        self.ga = GConstGA(self.genome)
+    def set_instance(self,check_fun):
+        self.ga = GConstGA(self.genome,check_fun)
         self.ga.minimax = Consts.minimaxType["minimize"]
 
     def solve(self):
