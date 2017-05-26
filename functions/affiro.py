@@ -29,6 +29,9 @@ def get_hi_bnds():
 def get_low_bnds():
     return lo_bnds
 
+def get_opt_min():
+    return  -4.6475314286E+02
+
 def check_constraints_bnds(x):
     if (np.dot(A,x) == b).all():
         if(x <= hi_bnds).all():
