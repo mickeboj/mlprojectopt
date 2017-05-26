@@ -34,8 +34,7 @@ def check_constraints_bnds(x):
         if(x <= hi_bnds).all():
             if(x >= lo_bnds).all():
                 return True
-    else:
-        return False
+    return False
 
 def name():
     return "affiro LP problem"

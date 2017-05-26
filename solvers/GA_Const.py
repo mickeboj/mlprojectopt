@@ -19,8 +19,9 @@ import pyevolve
 
 class GConstGA(GSimpleGA.GSimpleGA):
 
-    def __init__(self,genome):
+    def __init__(self,genome,check_fun):
         super(GConstGA,self).__init__(genome)
+        self.check_fun  = check_fun
 
 
     def step(self):
@@ -37,40 +38,44 @@ class GConstGA(GSimpleGA.GSimpleGA):
         crossover_empty = self.select(popID=self.currentGeneration).crossover.isEmpty()
 
         for i in xrange(0, size_iterate, 2):
-            #TODO  checkbefore append
-            genomeMom = self.select(popID=self.currentGeneration)
-            genomeDad = self.select(popID=self.currentGeneration)
+            while True:
+                genomeMom = self.select(popID=self.currentGeneration)
+                genomeDad = self.select(popID=self.currentGeneration)
 
-            if not crossover_empty and self.pCrossover >= 1.0:
-                for it in genomeMom.crossover.applyFunctions(mom=genomeMom, dad=genomeDad, count=2):
-                    (sister, brother) = it
-            else:
-                if not crossover_empty and Util.randomFlipCoin(self.pCrossover):
+                if not crossover_empty and self.pCrossover >= 1.0:
                     for it in genomeMom.crossover.applyFunctions(mom=genomeMom, dad=genomeDad, count=2):
                         (sister, brother) = it
                 else:
-                    sister = genomeMom.clone()
-                    brother = genomeDad.clone()
+                    if not crossover_empty and Util.randomFlipCoin(self.pCrossover):
+                        for it in genomeMom.crossover.applyFunctions(mom=genomeMom, dad=genomeDad, count=2):
+                            (sister, brother) = it
+                    else:
+                        sister = genomeMom.clone()
+                        brother = genomeDad.clone()
 
-            sister.mutate(pmut=self.pMutation, ga_engine=self)
-            brother.mutate(pmut=self.pMutation, ga_engine=self)
+                sister.mutate(pmut=self.pMutation, ga_engine=self)
+                brother.mutate(pmut=self.pMutation, ga_engine=self)
+                if self.check_fun(np.array(sister.genomeList)) and self.check_fun(np.array(brother.genomeList)):
+                    break
 
             newPop.internalPop.append(sister)
             newPop.internalPop.append(brother)
 
         if len(self.internalPop) % 2 != 0:
-            genomeMom = self.select(popID=self.currentGeneration)
-            genomeDad = self.select(popID=self.currentGeneration)
+            while True:
+                genomeMom = self.select(popID=self.currentGeneration)
+                genomeDad = self.select(popID=self.currentGeneration)
 
-            if Util.randomFlipCoin(self.pCrossover):
-                for it in genomeMom.crossover.applyFunctions(mom=genomeMom, dad=genomeDad, count=1):
-                    (sister, brother) = it
-            else:
-                sister = random.choice([genomeMom, genomeDad])
-                sister = sister.clone()
-                sister.mutate(pmut=self.pMutation, ga_engine=self)
+                if Util.randomFlipCoin(self.pCrossover):
+                    for it in genomeMom.crossover.applyFunctions(mom=genomeMom, dad=genomeDad, count=1):
+                        (sister, brother) = it
+                else:
+                    sister = random.choice([genomeMom, genomeDad])
+                    sister = sister.clone()
+                    sister.mutate(pmut=self.pMutation, ga_engine=self)
 
-            #TODO  checkbefore append
+                if self.check_fun(np.array(sister.genomeList)):
+                    break
             newPop.internalPop.append(sister)
 
         logging.debug("Evaluating the new created population.")
@@ -108,14 +113,6 @@ class GConstGA(GSimpleGA.GSimpleGA):
 
 
 
-
-
-
-
-
-
-
-
 class Genetic_Solver(object):
 
 
@@ -130,7 +127,7 @@ class Genetic_Solver(object):
         self.freq = freq
 
     def set_instance(self):
-        self.ga = GSimpleGA.GSimpleGA(self.genome)
+        self.ga = GConstGA(self.genome)
         self.ga.minimax = Consts.minimaxType["minimize"]
 
     def solve(self):
