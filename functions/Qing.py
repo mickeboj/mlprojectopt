@@ -4,7 +4,7 @@ import numpy as np
 def obj_fun(x):
     first_sum=0.0
     for i in range(len(x)):
-        first_sum =(x[i]**2-(i+1))**2
+        first_sum +=(x[i]**2-(i+1))**2
     return first_sum
 
 def get_grad(x):
