@@ -1,4 +1,4 @@
-from solvers import GA_Const,BFGS
+from solvers import GA,SIMPLEX
 from functions import affiro
 from tests import stabilitytest, accuracytest, timetest, dimensiontest
 from pyevolve import Initializators, Mutators, Crossovers, Scaling
@@ -19,7 +19,7 @@ def const_init(genome, **args):
 
 def set_genome_par(genome,bounds):
     genome.setParams(rangemin=bounds[0],rangemax=bounds[1])
-    genome.initializator.set(const_init)
+    genome.initializator.set(Initializators.G1DListInitializatorReal)
     genome.mutator.set(Mutators.G1DListMutatorRealGaussian)
     genome.crossover.set(Crossovers.G1DListCrossoverRealSBX)
 
@@ -31,14 +31,39 @@ def set_ga_par(ga):
 
 
 def get_Gsolv(dim):
-    Gsolv = GA_Const.Genetic_Solver()
-    Gsolv.set_fun(affiro.obj_fun,dim,1)
-    set_genome_par(Gsolv.genome,(0,1e10))
-    Gsolv.set_instance(affiro.check_constraints_bnds)
+    Gsolv = GA.Genetic_Solver()
+    Gsolv.set_fun(affiro.dum_fun,dim,0)
+    set_genome_par(Gsolv.genome,affiro.get_bounds())
+    Gsolv.set_instance()
     set_ga_par(Gsolv.ga)
     return Gsolv
 
 
+Bsolv = SIMPLEX.SIMPLEX()
+Bsolv.set_matrices(affiro.get_A(),affiro.get_b(),affiro.get_c(),affiro.get_hi_bnds(),
+                    affiro.get_low_bnds())
+
+
 if __name__ == '__main__':
-    G = get_Gsolv(dimension)
-    G.solve()
+    Stabtest = stabilitytest.STest(get_Gsolv,Bsolv,affiro.get_bounds(),
+    dimension,100,affiro.name())
+    Stabtest.run()
+    Stabtest.print_res()
+    Stabtest.plot_res()
+
+    Acctest = accuracytest.ATest(get_Gsolv,Bsolv,affiro.get_bounds(),
+                                dimension,50,affiro.get_opt_min(),affiro.name())
+    Acctest.run()
+    Acctest.print_res()
+    Acctest.plot_res()
+
+    Timetest = timetest.TTest(get_Gsolv,Bsolv,affiro.get_bounds(),
+                                dimension,100,affiro.name())
+    Timetest.run()
+    Timetest.print_res()
+    Timetest.plot_res()
+    #
+    # Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,ackley.get_bounds(),range(10,201,10),ackley.get_opt_min(),ackley.name())
+    # Dimtest.run()
+    # Dimtest.print_res()
+    # Dimtest.plot_res()

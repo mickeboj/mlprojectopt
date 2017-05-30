@@ -37,16 +37,16 @@ if __name__ == '__main__':
     Stabtest.print_res()
     Stabtest.plot_res()
 
-    Timetest = timetest.TTest(get_Gsolv,Bsolv,step.get_bounds(),
-                               dimension,100,step.name())
-    Timetest.run()
-    Timetest.print_res()
-    Timetest.plot_res()
-
-    Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,step.get_bounds(),range(10,201,10),step.get_opt_min(),step.name())
-    Dimtest.run()
-    Dimtest.print_res()
-    Dimtest.plot_res()
+    # Timetest = timetest.TTest(get_Gsolv,Bsolv,step.get_bounds(),
+    #                            dimension,100,step.name())
+    # Timetest.run()
+    # Timetest.print_res()
+    # Timetest.plot_res()
+    #
+    # Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,step.get_bounds(),range(10,201,10),step.get_opt_min(),step.name())
+    # Dimtest.run()
+    # Dimtest.print_res()
+    # Dimtest.plot_res()
 
     # Acctest = accuracytest.ATest(get_Gsolv,Bsolv,step.get_bounds(),
                             #    dimension,50,step.get_opt_min(),step.name())

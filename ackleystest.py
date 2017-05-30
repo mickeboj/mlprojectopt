@@ -3,7 +3,7 @@ from functions import ackley
 from tests import stabilitytest, accuracytest, timetest, dimensiontest
 from pyevolve import Initializators, Mutators, Crossovers
 
-dimension = 3
+dimension = 25
 
 
 def set_genome_par(genome,bounds):

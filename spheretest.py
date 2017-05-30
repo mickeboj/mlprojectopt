@@ -48,13 +48,13 @@ if __name__ == '__main__':
     # Acctest.print_res()
     # Acctest.plot_res()
 
-    Timetest = timetest.TTest(get_Gsolv,Bsolv,sphere.get_bounds(),
-                                dimension,100,sphere.name())
-    Timetest.run()
-    Timetest.print_res()
-    Timetest.plot_res()
-
-    Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,sphere.get_bounds(),range(10,201,10),sphere.get_opt_min(),sphere.name())
-    Dimtest.run()
-    Dimtest.print_res()
-    Dimtest.plot_res()
+    # Timetest = timetest.TTest(get_Gsolv,Bsolv,sphere.get_bounds(),
+    #                             dimension,100,sphere.name())
+    # Timetest.run()
+    # Timetest.print_res()
+    # Timetest.plot_res()
+    #
+    # Dimtest = dimensiontest.DTest(get_Gsolv,Bsolv,sphere.get_bounds(),range(10,201,10),sphere.get_opt_min(),sphere.name())
+    # Dimtest.run()
+    # Dimtest.print_res()
+    # Dimtest.plot_res()

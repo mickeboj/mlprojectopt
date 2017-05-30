@@ -2,6 +2,7 @@ import math
 import numpy as np
 import scipy.io
 
+
 tempA = scipy.io.loadmat('Amat.mat')
 A = tempA['As']
 tempB = scipy.io.loadmat('Bmat.mat')
@@ -42,6 +43,13 @@ def obj_fun(x):
     z = np.array(x.genomeList)
     z = z.reshape(1,51)
     return np.dot(z,c)[0][0]
+
+
+def dum_fun(x):
+    return 0.0
+
+def get_bounds():
+    return (-0.1,0.0)
 
 
 def name():

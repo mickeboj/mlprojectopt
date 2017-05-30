@@ -1,6 +1,6 @@
-from scipy.optimize import minimize
 from numpy.random import random as r
-
+from scipy.optimize import linprog
+import numpy as np
 
 class SIMPLEX(object):
 
@@ -52,9 +52,8 @@ class SIMPLEX(object):
 
 
     def solve(self,bounds):
-        # x0=[]
-        # bnds = self.bnds_fun(self.dim)
-        # for i in range(self.dim):
-        #     x0.append(bounds[1] - r(1)[0]*(bounds[1]-bounds[0]))
-        res = linprog(self.C,A_eq= self.A,b_eq = self.B,bounds = (self.Lo,self.Hi))
+        c = []
+        for e in self.C:
+            c.append(e[0])
+        res = linprog(c,A_eq= self.A.reshape(27,51),b_eq = self.B.reshape(27,1),bounds = (0,1e20))
         return res.fun
